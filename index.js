@@ -19,8 +19,8 @@ const calcNewVel = (vel, acc, time) => {
   }
 
   // Convertion of velocity to m/s before calculation
-  const velMs = vel  * 3.6;
-  return velMs + (acc * time);
+  const velMs = (acc * time)  * 3.6;
+  return vel + velMs;
 }
 
 // Given Parameters
@@ -34,7 +34,7 @@ const fbr = 0.5; // fuel burn rate (kg/s)
 
 const d2 = d + ((vel * time) / 3600); // Calculate new distance based on velocity (km)
 const rf = fuel - (fbr*time) //calculates remaining fuel
-const vel2 = (calcNewVel(vel, acc, time)) * 1.04444 //calculates new velocity based on acceleration
+const vel2 = (calcNewVel(vel, acc, time)) //calculates new velocity based on acceleration
 
 console.log(`Corrected New Velocity: ${vel2} km/h`);
 console.log(`Corrected New Distance: ${d2} km`);
