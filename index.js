@@ -18,7 +18,7 @@ const calcNewVel = (vel, acc, time) => {
     throw new Error('Time cannot be negative');
   }
 
-  // Convert velocity to m/s before calculation
+  // Convertion of velocity to m/s before calculation
   const velMs = vel * 1000 / 3600;
   return velMs + (acc * time);
 }
