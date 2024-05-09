@@ -13,6 +13,20 @@ const d = 0; // distance (km)
 const fuel = 5000; // remaining fuel (kg)
 const fbr = 0.5; // fuel burn rate (kg/s)
 
+// Check if the units of the given parameters are consistent
+const isNumber = (variable) => Object.prototype.toString.call(variable) === '[object Number]';
+
+const checkParameters = () => [vel, acc, time, d, fuel, fbr].every(isNumber);
+
+const checkFunction = (func, numArgs) => typeof func === 'function' && func.length === numArgs;
+
+if (checkParameters()) {
+  // Check if the time is not less than zero
+  if (time < 0) {
+    throw new Error('The time cannot be less than zero');
+  }
+}
+
 
 const d2 = d + (vel*time) //calcultes new distance
 const rf = fuel - (fbr*time) //calculates remaining fuel
