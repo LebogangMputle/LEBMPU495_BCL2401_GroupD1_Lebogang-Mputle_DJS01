@@ -7,7 +7,7 @@
 
 // Define the calcNewVel function with error handling and unit conversion
 const calcNewVel = (vel, acc, time) => {
-  // Check for negative values
+  // Check for negative values and print error messages.
   if (vel < 0) {
     throw new Error('Velocity cannot be negative');
   }
