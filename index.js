@@ -6,42 +6,39 @@
  */
 
 // Define the calcNewVel function with error handling and unit conversion
-const calcNewVel = (vel, acc, time) => {
-  // Check for negative values and print error messages.
-  if (vel < 0) {
+const calcNewVel = (velKmH, accMs2, timeSec) => {
+  if (velKmH < 0) {
     throw new Error('Velocity cannot be negative');
   }
-  if (acc < 0) {
+  if (accMs2 < 0) {
     throw new Error('Acceleration cannot be negative');
   }
-  if (time < 0) {
+  if (timeSec < 0) {
     throw new Error('Time cannot be negative');
   }
 
-  // Convertion of velocity to m/s before calculation
-  const velMs = (acc * time)  * 3.6;
-  return vel + velMs;
+  // Convert acceleration time product to km/h
+  const velIncrementKmH = (accMs2 * timeSec * 3.6);
+  return velKmH + velIncrementKmH;
 }
 
 // Given Parameters
-const vel = 10000; // velocity (km/h)
-const acc = 3; // acceleration (m/s^2)
-const time = 3600; // seconds (1 hour)
-const d = 0; // distance (km)
-const fuel = 5000; // remaining fuel (kg)
-const fbr = 0.5; // fuel burn rate (kg/s)
+const initialVelKmH = 10000; // velocity (km/h)
+const accelerationMs2 = 3; // acceleration (m/s^2)
+const timeSec = 3600; // time (seconds)
+const initialDistanceKm = 0; // distance (km)
+const initialFuelKg = 5000; // remaining fuel (kg)
+const fuelBurnRateKgS = 0.5; // fuel burn rate (kg/s)
 
+// Calculate new distance based on velocity (km)
+const newDistanceKm = initialDistanceKm + ((initialVelKmH * timeSec) / 3600);
 
-const d2 = d + ((vel * time) / 3600); // Calculate new distance based on velocity (km)
-const rf = fuel - (fbr*time) //calculates remaining fuel
-const vel2 = (calcNewVel(vel, acc, time)) //calculates new velocity based on acceleration
+// Calculate remaining fuel
+const remainingFuelKg = initialFuelKg - (fuelBurnRateKgS * timeSec);
 
-console.log(`Corrected New Velocity: ${vel2} km/h`);
-console.log(`Corrected New Distance: ${d2} km`);
-console.log(`Corrected Remaining Fuel: ${rf} kg`);
+// Calculate new velocity based on acceleration
+const newVelKmH = calcNewVel(initialVelKmH, accelerationMs2, timeSec);
 
-
-
-
-
-
+console.log(`Corrected New Velocity: ${newVelKmH} km/h`);
+console.log(`Corrected New Distance: ${newDistanceKm} km`);
+console.log(`Corrected Remaining Fuel: ${remainingFuelKg} kg`);
